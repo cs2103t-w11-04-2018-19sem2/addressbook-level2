@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.AddressBook;
+import seedu.addressbook.data.CommandHistory;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Address;
 import seedu.addressbook.data.person.Email;
@@ -30,6 +31,8 @@ public class DeleteCommandTest {
     private List<ReadOnlyPerson> listWithEveryone;
     private List<ReadOnlyPerson> listWithSurnameDoe;
 
+    private CommandHistory emptyHistory;
+
     @Before
     public void setUp() throws Exception {
         Person johnDoe = new Person(new Name("John Doe"), new Phone("61234567", false),
@@ -49,6 +52,8 @@ public class DeleteCommandTest {
 
         listWithEveryone = TestUtil.createList(johnDoe, janeDoe, davidGrant, samDoe);
         listWithSurnameDoe = TestUtil.createList(johnDoe, janeDoe, samDoe);
+
+        emptyHistory = new CommandHistory();
     }
 
     @Test
@@ -96,7 +101,7 @@ public class DeleteCommandTest {
                                                                       List<ReadOnlyPerson> displayList) {
 
         DeleteCommand command = new DeleteCommand(targetVisibleIndex);
-        command.setData(addressBook, displayList);
+        command.setData(addressBook, displayList, emptyHistory);
 
         return command;
     }

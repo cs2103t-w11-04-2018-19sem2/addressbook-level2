@@ -11,6 +11,7 @@ import java.util.Set;
 import org.junit.Test;
 
 import seedu.addressbook.data.AddressBook;
+import seedu.addressbook.data.CommandHistory;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.util.TypicalPersons;
@@ -19,6 +20,7 @@ public class FindCommandTest {
 
     private final AddressBook addressBook = new TypicalPersons().getTypicalAddressBook();
     private final TypicalPersons td = new TypicalPersons();
+    private final CommandHistory ch = new CommandHistory();
 
     @Test
     public void execute() throws IllegalValueException {
@@ -56,8 +58,7 @@ public class FindCommandTest {
     private FindCommand createFindCommand(String[] keywords) {
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         FindCommand command = new FindCommand(keywordSet);
-        command.setData(addressBook, Collections.emptyList());
+        command.setData(addressBook, Collections.emptyList(), ch);
         return command;
     }
-
 }
