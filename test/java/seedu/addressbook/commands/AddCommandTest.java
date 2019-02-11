@@ -14,6 +14,7 @@ import java.util.Set;
 import org.junit.Test;
 
 import seedu.addressbook.data.AddressBook;
+import seedu.addressbook.data.CommandHistory;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Address;
 import seedu.addressbook.data.person.Email;
@@ -27,6 +28,7 @@ import seedu.addressbook.util.TestUtil;
 public class AddCommandTest {
     private static final List<ReadOnlyPerson> EMPTY_PERSON_LIST = Collections.emptyList();
     private static final Set<String> EMPTY_STRING_SET = Collections.emptySet();
+    private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
     @Test
     public void addCommand_invalidName_throwsException() {
@@ -119,7 +121,7 @@ public class AddCommandTest {
         Person p = TestUtil.generateTestPerson();
         AddCommand command = new AddCommand(p);
         AddressBook book = new AddressBook();
-        command.setData(book, EMPTY_PERSON_LIST);
+        command.setData(book, EMPTY_PERSON_LIST, EMPTY_COMMAND_HISTORY);
         CommandResult result = command.execute();
         UniquePersonList people = book.getAllPersons();
 
@@ -135,7 +137,7 @@ public class AddCommandTest {
         AddressBook book = new AddressBook();
         book.addPerson(p);
         AddCommand command = new AddCommand(p);
-        command.setData(book, EMPTY_PERSON_LIST);
+        command.setData(book, EMPTY_PERSON_LIST, EMPTY_COMMAND_HISTORY);
         CommandResult result = command.execute();
 
         assertFalse(result.getRelevantPersons().isPresent());
